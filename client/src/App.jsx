@@ -1,12 +1,15 @@
 import "./layout.scss";
-import HompePage from "./routes/HomePage/HompePage";
+import HomePage from "./routes/HomePage/HomePage";
 import {createBrowserRouter,RouterProvider,Route,Link} from "react-router-dom";
 import ListPage from "./routes/ListPage/ListPage";
-import Layout from "./routes/Layout/Layout";
+import {Layout} from "./routes/Layout/Layout";
 import SinglePage from './routes/SinglePage/SinglePage';
 import ProfilePage from "./routes/ProfilePage/ProfilePage";
 import Login from "./routes/Login/Login";
 import Register from "./routes/Register/Register";
+import ProfileUpdatePage from "./routes/ProfileUpdatePage/ProfileUpdatePage";
+import NewPostPage from "./routes/NewPostPage/NewPostPage";
+import { singlePageLoadingData } from "./lib/loaders";
 
 function App() {
 
@@ -16,17 +19,7 @@ function App() {
       element: <Layout/>,
       children:[
        { path: "/",
-        element: <HompePage/>
-      },
-      { path: "/list",
-        element: <ListPage/>
-      },
-      { path: "/:id",
-        element: <SinglePage/>
-      }
-      ,
-      { path: "/profile",
-        element: <ProfilePage/>
+        element: <HomePage/>
       },
       {
         path:"/login",
@@ -35,6 +28,32 @@ function App() {
       {
         path:"/register",
         element:<Register/>
+      }
+      ]
+    },
+    {
+      path: "/",
+      element: <Layout/>,
+      children:[
+       { path: "/",
+        element: <HomePage/>
+      },
+      { path: "/list",
+        element: <ListPage/>
+      },
+      { path: "/:id",
+        element: <SinglePage/>,
+        loader: singlePageLoadingData,
+      }
+      ,
+      { path: "/profile",
+        element: <ProfilePage/>
+      },
+      { path: "/profile/update",
+        element: <ProfileUpdatePage/>
+      },
+      { path: "/add",
+        element: <NewPostPage/>
       }
       ]
     }

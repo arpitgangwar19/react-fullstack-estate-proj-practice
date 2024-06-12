@@ -1,8 +1,11 @@
 import React from "react";
 import "./HomePage.scss";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { userContext } from "../../context/UserContext.jsx";
 
-const HompePage = () => {
+const HomePage = () => {
+  const { currentUser } = userContext();
+  console.log(currentUser);
   return (
     <div className="homePage">
       <div className="textContainer">
@@ -38,4 +41,4 @@ const HompePage = () => {
   );
 };
 
-export default HompePage;
+export default HomePage;
