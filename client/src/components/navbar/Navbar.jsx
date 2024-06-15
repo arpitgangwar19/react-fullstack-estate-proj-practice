@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import "./Navbar.scss";
 import {Link} from "react-router-dom";
 import { userContext } from "../../context/UserContext.jsx";
+import { useNotificationStore } from "../../lib/notificationStore.js";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const {currentUser} = userContext();
   // const user = false;
+  const fetch = useNotificationStore((state) => state.fetch);
+  const number = useNotificationStore((state) => state.number);
+
   return (
     <nav>
       <div className="left-side">
@@ -28,7 +32,7 @@ const Navbar = () => {
             />
             <span>{currentUser.username}</span>
             <Link to="/profile" className="profile">
-              <div className="notification">3</div>
+              {number > 0 && <div className="notification">{number}</div>}
               <span>Profile</span>
             </Link>
           </div>

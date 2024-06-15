@@ -9,7 +9,7 @@ import Login from "./routes/Login/Login";
 import Register from "./routes/Register/Register";
 import ProfileUpdatePage from "./routes/ProfileUpdatePage/ProfileUpdatePage";
 import NewPostPage from "./routes/NewPostPage/NewPostPage";
-import { singlePageLoadingData } from "./lib/loaders";
+import { singlePageLoadingData,listPageLoader, profilePageLoader } from "./lib/loaders";
 
 function App() {
 
@@ -28,6 +28,15 @@ function App() {
       {
         path:"/register",
         element:<Register/>
+      },
+      
+      { path: "/list",
+        element: <ListPage/>,
+        loader: listPageLoader
+      },
+      { path: "/:id",
+        element: <SinglePage/>,
+        loader: singlePageLoadingData,
       }
       ]
     },
@@ -37,17 +46,12 @@ function App() {
       children:[
        { path: "/",
         element: <HomePage/>
-      },
-      { path: "/list",
-        element: <ListPage/>
-      },
-      { path: "/:id",
-        element: <SinglePage/>,
-        loader: singlePageLoadingData,
       }
       ,
       { path: "/profile",
-        element: <ProfilePage/>
+        element: <ProfilePage/>,
+        loader:profilePageLoader,
+
       },
       { path: "/profile/update",
         element: <ProfileUpdatePage/>
